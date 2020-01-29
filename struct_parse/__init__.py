@@ -122,3 +122,8 @@ class FieldList:
 
     def __contains__(self, item):
         return item in self.fields
+
+
+def parse(st: str) -> FieldList:
+    return FieldList.from_string(st)
+
