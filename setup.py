@@ -12,6 +12,11 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/zmarvel/struct_parse',
+    project_urls={
+        'Bug Tracker': 'https://github.com/zmarvel/struct_parse/issues',
+        'Documentation': 'https://struct-parse.readthedocs.io/',
+        'Source Code': 'https://github.com/zmarvel/struct_parse',
+    },
     packages=setuptools.find_packages(),
     classifiers=[
         'Programming Language :: Python :: 3',
