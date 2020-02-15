@@ -11,6 +11,7 @@ Welcome to struct-parse's documentation!
    :caption: Contents:
 
    struct_parse
+   releasing
 
 Indices and tables
 ==================
