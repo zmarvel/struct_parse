@@ -5,7 +5,7 @@ with open('README.rst', 'r') as fh:
 
 setuptools.setup(
     name='struct_parse',
-    version='0.0.1',
+    version='0.0.2',
     author='Zack Marvel',
     author_email='zpmarvel@gmail.com',
     description='Parse struct definitions like those used in the struct module',
