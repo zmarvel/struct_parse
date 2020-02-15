@@ -1,5 +1,5 @@
-"""Parse the format defined in the :py:module:`struct` standard library module.
-Single-file parser for the string format specified by the :py:module:`struct`
+"""Parse the format defined in the :py:mod:`struct` standard library module.
+Single-file parser for the string format specified by the :py:mod:`struct`
 standard library module. This enables the use of strings describing the layout
 of packed binary data for other things besides just packing and unpacking, like
 generating C struct definitions.
@@ -103,7 +103,7 @@ class FieldList:
 
         Args:
             fmt_string: Format string conformant to the specification in
-                :py:module:`struct`.
+                :py:mod:`struct`.
 
         Returns:
             :py:class:`FieldList` object representing the parsed string as a
@@ -154,7 +154,7 @@ def parse(format_str: str) -> FieldList:
     """Helper to parse a format string into a :py:class:`FieldList`.
 
     Args:
-        format_str: Format string, as specified by :py:module:`struct`.
+        format_str: Format string, as specified by :py:mod:`struct`.
 
     Returns:
         :py:class:`FieldList` object representing the parsed format string.
