@@ -1,3 +1,11 @@
+"""Parse the format defined in the :py:module:`struct` standard library module.
+Single-file parser for the string format specified by the :py:module:`struct`
+standard library module. This enables the use of strings describing the layout
+of packed binary data for other things besides just packing and unpacking, like
+generating C struct definitions.
+"""
+
+
 from typing import List
 import enum
 
@@ -25,6 +33,9 @@ ORDER_STRING[ByteOrder.NATIVE] = '@'
 
 
 class FieldType(enum.Enum):
+    """Type of a field in the struct. Represented by a single character in the
+    format string.
+    """
     PAD = 0
     CHAR = 1
     SIGNED_CHAR = 2
@@ -79,15 +90,25 @@ FORMAT_STRING[FieldType.CHAR_ARRAY] = 's'
 
 
 class FieldList:
-    """Simply a list of fields.
+    """Simply a list of fields, along with a byte_order.
     """
     def __init__(self, fields: List[FieldType] = [],
                  byte_order: ByteOrder = ByteOrder.NATIVE):
-        self.fields = fields  # List[FieldType]
-        self.byte_order = byte_order  # ByteOrder
+        self.fields = fields  # type: List[FieldType]
+        self.byte_order = byte_order  # type: ByteOrder
 
     @classmethod
-    def from_string(cls, fmt_string):
+    def from_string(cls, fmt_string: str) -> 'FieldList':
+        """Construct a :py:class:`FieldList` from a format string.
+
+        Args:
+            fmt_string: Format string conformant to the specification in
+                :py:module:`struct`.
+
+        Returns:
+            :py:class:`FieldList` object representing the parsed string as a
+            flat AST.
+        """
         if len(fmt_string) == 0:
             return FieldList()
 
@@ -103,7 +124,12 @@ class FieldList:
         return FieldList([FIELD_TYPE[c] for c in fmt_string[start:]],
                          byte_order)
 
-    def to_string(self):
+    def to_string(self) -> str:
+        """Convert the list of fields back into a format string.
+
+        Returns:
+            Format string.
+        """
         if len(self.fields) == 0:
             return ''
 
@@ -117,13 +143,21 @@ class FieldList:
     def __len__(self):
         return len(self.fields)
 
-    def __getitem__(self, item):
+    def __getitem__(self, item: int) -> FieldType:
         return self.fields[item]
 
-    def __contains__(self, item):
+    def __contains__(self, item: int):
         return item in self.fields
 
 
-def parse(st: str) -> FieldList:
-    return FieldList.from_string(st)
+def parse(format_str: str) -> FieldList:
+    """Helper to parse a format string into a :py:class:`FieldList`.
+
+    Args:
+        format_str: Format string, as specified by :py:module:`struct`.
+
+    Returns:
+        :py:class:`FieldList` object representing the parsed format string.
+    """
+    return FieldList.from_string(format_str)
 
